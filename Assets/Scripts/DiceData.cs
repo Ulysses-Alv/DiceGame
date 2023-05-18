@@ -1,28 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class DiceData : MonoBehaviour
 {
     public int diceValue;
-    public Vector3 position;
-    public GameObject thisGameObject;
-    public Sprite spriteDice;
-    
-    
     public int rowAssigned;
-    public bool isPlayerOne;
 
-    public DiceData(int diceValue, Vector3 position, Sprite spriteDice, GameObject gameObject)
+    public Vector3 position;
+    
+    public Sprite sprite;
+    
+
+
+    public void SetData(int _diceValue, Sprite _sprite, Vector3 _position)
     {
-        this.thisGameObject = gameObject;
+        diceValue = _diceValue;
+        sprite= _sprite;
+        position = _position;
+    }
 
-        this.diceValue = diceValue;
-        this.position = position;
-        this.spriteDice = spriteDice;
-
-        gameObject.GetComponent<SpriteRenderer>().sprite = spriteDice;
-        gameObject.GetComponent<DiceData>().diceValue = diceValue;
-        gameObject.transform.position = position;
+    public void ResetData()
+    {
+        diceValue = 0;
+        sprite = null;
+        rowAssigned = 0;
+        position = Vector3.zero;
     }
 }

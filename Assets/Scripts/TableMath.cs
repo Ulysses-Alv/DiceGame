@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-public class Table_math : MonoBehaviour
+public class TableMath : MonoBehaviour
 {
-    public Row_math R1;
-    public Row_math R2;
-    public Row_math R3;
+    public RowMath R1;
+    public RowMath R2;
+    public RowMath R3;
     TextMeshProUGUI text;
     int resultadoFinal;
     private void Start()

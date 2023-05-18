@@ -73,7 +73,6 @@ public class ObjectPooling : MonoBehaviour
 
         GameObject go = pool[id].Dequeue();
         go.SetActive(true);
-
         return go;
         
     }

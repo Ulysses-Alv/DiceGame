@@ -3,21 +3,14 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 
-public class Row_math : MonoBehaviour
+public class RowMath : MonoBehaviour
 {
-
+    
     public TextMeshProUGUI thisText;
 
-    Row_button myRow_Button;
-    class DiceValue
-    {
-        public float value;
+    [SerializeField]
+    PutDiceIn myRow_Button;
 
-        public DiceValue(float value)
-        {
-            this.value = value;
-        }
-    }
     public int resultado;
 
     private void Start()
@@ -27,23 +20,23 @@ public class Row_math : MonoBehaviour
     }    
     public void RefreshMaths()
     {
-      
+        thisText.text = Row_math().ToString();
     }
 
-    public int RowMath()
+    public int Row_math()
     {
-        resultado = sumAll();
+        resultado = SumAll();
         return resultado;
     }
 
-    int sumAll()
+    int SumAll()
     {
-        int suma = sumSobrantes() + sumIguales();
+        int suma = SumSobrantes() + SumIguales();
         
         return suma;
     }
 
-    int sumSobrantes()
+    int SumSobrantes()
     {
         int resultadoSuma = 0;
         
@@ -54,7 +47,7 @@ public class Row_math : MonoBehaviour
         }
         return resultadoSuma;
     }
-    int sumIguales()
+    int SumIguales()
     {
         int resultadoSuma = 0;
 
@@ -70,7 +63,7 @@ public class Row_math : MonoBehaviour
 
     private List<GameObject> GetGameObjects()
     {
-        return myRow_Button.gameObjects;
+        return myRow_Button.dicesInTheRow;
     }
     public (List<GameObject> iguales, List<GameObject> sobrantes) ObtenerIgualesYSobrantes(List<GameObject> lista)
     {
