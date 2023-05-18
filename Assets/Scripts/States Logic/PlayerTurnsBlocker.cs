@@ -6,7 +6,7 @@ public class PlayerTurnsBlocker : MonoBehaviour, ITurnBlocker
     public GameObject[] gameObjects;
 
     [SerializeField]
-    private static GameObject[] _gameObjects => instance.gameObjects;
+    public static GameObject[] _gameObjects => instance.gameObjects;
 
     private static PlayerTurnsBlocker instance;  // Instancia privada de la clase
 

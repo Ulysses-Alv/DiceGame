@@ -32,7 +32,7 @@ public class PutDiceIn : MonoBehaviour
 
     public void DoLogic()
     {
-        row_Math.RefreshMaths();
+        row_Math.RefreshCountText();
         Dice_Roller.gameObjectDiceGO = null;
         unasiggnedDice = null;
     }
@@ -78,7 +78,7 @@ public class PutDiceIn : MonoBehaviour
             DeleteDice.DestroyDice(Dice_Roller._dice, go);
         }
 
-        enemy_row_Button.row_Math.RefreshMaths();
+        enemy_row_Button.row_Math.RefreshCountText();
         enemy_row_Button.dicesInTheRow = RemoveDuplicates(originalList, list);
     }
     List<GameObject> RemoveDuplicates(List<GameObject> listaA, List<GameObject> listaB)

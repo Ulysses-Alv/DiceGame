@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System.Collections;
 
 public class RowMath : MonoBehaviour
 {
@@ -11,61 +10,54 @@ public class RowMath : MonoBehaviour
     [SerializeField]
     PutDiceIn myRow_Button;
 
-    public int resultado;
+    public int result;
 
     private void Start()
     {
-        
         thisText.text = 0.ToString();
     }    
-    public void RefreshMaths()
+    public void RefreshCountText()
     {
-        thisText.text = Row_math().ToString();
-    }
-
-    public int Row_math()
-    {
-        resultado = SumAll();
-        return resultado;
-    }
+        thisText.text = SumAll().ToString(); //Refresh the 
+    }    
 
     int SumAll()
     {
-        int suma = SumSobrantes() + SumIguales();
-        
-        return suma;
+        result = SumOthers() + SumBonusValues();
+        return result;
     }
 
-    int SumSobrantes()
+    int SumOthers()
     {
-        int resultadoSuma = 0;
+        int resultSum = 0;
         
-        var listas = ObtenerIgualesYSobrantes(GetGameObjects());
-        foreach(GameObject gameObject in listas.sobrantes)
+        var lists = GetSameAndOther(GetGameObjects());
+        foreach(GameObject gameObject in lists.sobrantes)
         {
-            resultadoSuma += gameObject.GetComponent<DiceData>().diceValue;
+            resultSum += gameObject.GetComponent<DiceData>().diceValue;
         }
-        return resultadoSuma;
+        return resultSum;
     }
-    int SumIguales()
+    int SumBonusValues()
     {
-        int resultadoSuma = 0;
+        int resultSum = 0;
 
-        var listas = ObtenerIgualesYSobrantes(GetGameObjects());
-        foreach (GameObject gameObject in listas.iguales)
+        var lists = GetSameAndOther(GetGameObjects());
+        foreach (GameObject gameObject in lists.iguales)
         {
-            resultadoSuma += gameObject.GetComponent<DiceData>().diceValue;
+            resultSum += gameObject.GetComponent<DiceData>().diceValue;
         }
-        resultadoSuma = resultadoSuma * listas.iguales.Count;
+        resultSum = resultSum * lists.iguales.Count; // Multiply the values with two or three as a bonus.
         
-        return resultadoSuma;
+        return resultSum;
     }
 
     private List<GameObject> GetGameObjects()
     {
         return myRow_Button.dicesInTheRow;
     }
-    public (List<GameObject> iguales, List<GameObject> sobrantes) ObtenerIgualesYSobrantes(List<GameObject> lista)
+    public (List<GameObject> iguales, List<GameObject> sobrantes) GetSameAndOther(List<GameObject> lista) 
+        //Split the list in two so I can multiply the values for the bonus.
     {
         List<GameObject> iguales = new List<GameObject>();
         List<GameObject> sobrantes = new List<GameObject>();

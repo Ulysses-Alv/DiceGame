@@ -25,16 +25,10 @@ public class ButtonOfTheRow : MonoBehaviour
     }
     public void EndTurnOfPlayer_Five()
     {
-        IATurnsBlocker.UnblockPlayersButtons();
-        PlayerTurnsBlocker.BlockPlayersButtons();
-
         SetPlayersTurns.EndTurnOfPlayer();
     }
     public void EndTurnOfIA()
     {
-        IATurnsBlocker.BlockPlayersButtons();
-        PlayerTurnsBlocker.UnblockPlayersButtons();
-
         SetPlayersTurns.EndTurnOfIA();
     }
 }
