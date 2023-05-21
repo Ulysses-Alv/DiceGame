@@ -1,42 +1,76 @@
 ﻿using UnityEngine;
 using UniRx;
+using Unity.VisualScripting;
 
 public class EndGameLogic : MonoBehaviour
 {
-    GameObject[] firstPlayerRows;
-    GameObject[] secondPlayerRows;
 
+    [SerializeField] BoardMath firstPlayer;
+    [SerializeField] BoardMath secondPlayer;
+
+    public static ReactiveProperty<bool> resetGame;
+
+    private void Awake()
+    {
+        resetGame = new ReactiveProperty<bool>(initialValue: false);
+    }
     private void Start()
     {
-        firstPlayerRows = PlayerTurnsBlocker._gameObjects;
-        secondPlayerRows = AITurnsBlocker._gameObjects;
         CurrentStates.current_gameState.Subscribe(OnGameEnd);
+        CurrentStates.current_gameState.Subscribe(SetWinner);
     }
-
     public void OnGameEnd(GameStates state)
     {
-        if (IsThePlayerTableFull(firstPlayerRows))
+        if ((firstPlayer.IsThePlayerTableFull() || secondPlayer.IsThePlayerTableFull()) &&
+            state != GameStates.END_A_GAME)
         {
-            CurrentStates.current_gameState.Value = GameStates.WIN_A_GAME;
-            print("TERMINÓ EL PARTIDO TURUTU");
-            return;
-        }
-        if (IsThePlayerTableFull(secondPlayerRows))
-        {
-            CurrentStates.current_gameState.Value = GameStates.LOSE_A_GAME;
-            print("TERMINÓ EL PARTIDO TURUTU");
-            return;
+            CurrentStates.current_gameState.Value = GameStates.END_A_GAME;
         }
     }
 
-    private bool IsThePlayerTableFull(GameObject[] gameObjects)
+    public void SetWinner(GameStates state)
     {
-        var sumOfDices = 0;
-        foreach (GameObject gameObject in gameObjects)
-        {
-            sumOfDices += gameObject.GetComponent<PutDiceIn>().dicesInTheRow.Count;
-        }
 
-        return sumOfDices == 9;
+        if (state != GameStates.END_A_GAME) return;
+
+        float first_value = firstPlayer.total_result.Value;
+        float second_value = secondPlayer.total_result.Value;
+
+        if (firstPlayer.IsThePlayerTableFull())
+        {
+            if (first_value >= second_value)
+            {
+                print("se ejecuta A");
+                AddGameWin.FirstPlayerGamesWon++;
+            }
+            if (first_value < second_value)
+            {
+                print("se ejecuta B");
+                AddGameWin.AIPlayerGamesWon++;
+            }
+            ResetForNewGame();
+            return;
+        }
+        if (secondPlayer.IsThePlayerTableFull())
+        {
+            if (first_value > second_value)
+            {
+                print("se ejecuta C");
+                AddGameWin.FirstPlayerGamesWon++;
+
+            }
+            if (first_value <= second_value)
+            {
+                print("se ejecuta D");
+                AddGameWin.AIPlayerGamesWon++;
+            }
+            ResetForNewGame();
+            return;
+        }
     }
+    void ResetForNewGame()
+    {
+        resetGame.Value = true;
+    }
+
 }

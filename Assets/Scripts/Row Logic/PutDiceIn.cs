@@ -1,26 +1,51 @@
+using System;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
+using UniRx;
 public class PutDiceIn : MonoBehaviour
 {
     public static GameObject unasiggnedDice;
 
     public RowMath row_Math;
-    
+
     [SerializeField]
     private Transform[] positions;
 
 
-    public int rowInt;
+    [SerializeField] int rowInt;
 
     public List<GameObject> dicesInTheRow = new();
 
-
     public PutDiceIn enemy_row_Button;
+    public bool IsRowFull()
+    {
+        return dicesInTheRow.Count == 3;
+    }
+
+    private void Awake()
+    {
+    }
+    private void Start()
+    {
+        EndGameLogic.resetGame.Subscribe(ResetValues);
+    }
+    public void ResetValues(bool isReset)
+    {
+        if (!isReset) return;
+
+        foreach( var dice in dicesInTheRow )
+        {
+            DeleteDice.DestroyDice(DiceRoller._dice, dice);
+        }
+        dicesInTheRow = new();
+    }
 
     public void PutDiceInRow()
     {
         if (unasiggnedDice == null) return;
 
+        if (IsRowFull()) return;
         int getLength = dicesInTheRow.Count;
 
         unasiggnedDice.transform.position = positions[getLength].position;
@@ -28,12 +53,12 @@ public class PutDiceIn : MonoBehaviour
         UnasiggnedDiceData().rowAssigned = rowInt;
 
         dicesInTheRow.Add(unasiggnedDice);
-    }
+    }    
 
     public void DoLogic()
     {
         row_Math.RefreshCountText();
-        Dice_Roller.gameObjectDiceGO = null;
+        DiceRoller.gameObjectDiceGO.Value = null;
         unasiggnedDice = null;
     }
 
@@ -75,7 +100,7 @@ public class PutDiceIn : MonoBehaviour
 
         foreach (GameObject go in list)
         {
-            DeleteDice.DestroyDice(Dice_Roller._dice, go);
+            DeleteDice.DestroyDice(DiceRoller._dice, go);
         }
 
         enemy_row_Button.row_Math.RefreshCountText();
