@@ -15,17 +15,15 @@ public class PutDiceIn : MonoBehaviour
 
     [SerializeField] int rowInt;
 
-    public List<GameObject> dicesInTheRow = new();
+    public List<GameObject> dicesInTheRow;
 
     public PutDiceIn enemy_row_Button;
     public bool IsRowFull()
     {
         return dicesInTheRow.Count == 3;
     }
+    int lastDiceValue;
 
-    private void Awake()
-    {
-    }
     private void Start()
     {
         EndGameLogic.resetGame.Subscribe(ResetValues);
@@ -51,7 +49,7 @@ public class PutDiceIn : MonoBehaviour
         unasiggnedDice.transform.position = positions[getLength].position;
 
         UnasiggnedDiceData().rowAssigned = rowInt;
-
+        lastDiceValue = UnasiggnedDiceData().diceValue;
         dicesInTheRow.Add(unasiggnedDice);
     }    
 
@@ -90,7 +88,7 @@ public class PutDiceIn : MonoBehaviour
 
     private bool Is_Filter_Game_Objects_Length_Zero()
     {
-        return FilterGameObjects(GetEnemyDicesInTheRow(), UnasiggnedDiceData().diceValue).Count == 0;
+        return FilterGameObjects(GetEnemyDicesInTheRow(), lastDiceValue).Count == 0;
     }
 
     private void DestroyOthersDices(int _diceValue)

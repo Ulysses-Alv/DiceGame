@@ -1,2 +1,4 @@
-﻿public enum GameStates
+﻿
+[System.Flags]
+public enum GameStates
 { MENU, START_GAME, PLAYER_TURNS, AI_TURNS, END_A_GAME, PLAYER_WIN_A_GAME, AI_WIN_A_GAME, END_MATCH, WIN_A_MATCH, LOSE_A_MATCH }

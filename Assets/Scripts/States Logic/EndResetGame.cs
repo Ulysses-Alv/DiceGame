@@ -10,7 +10,7 @@ public class EndResetGame :MonoBehaviour
     void EndReset(bool isReset)
     {
         if (!isReset) return;
-
+        //ResetBool();
         Invoke("ResetBool", 0.1f);
     }
 

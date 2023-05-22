@@ -8,6 +8,9 @@ public class EndGameLogic : MonoBehaviour
     [SerializeField] BoardMath firstPlayer;
     [SerializeField] BoardMath secondPlayer;
 
+    [SerializeField] AgentDicePlayer agentDicePlayerOne;
+    [SerializeField] AgentDicePlayer agentDicePlayerIA;
+
     public static ReactiveProperty<bool> resetGame;
 
     private void Awake()
@@ -40,13 +43,16 @@ public class EndGameLogic : MonoBehaviour
         {
             if (first_value >= second_value)
             {
-                print("se ejecuta A");
                 AddGameWin.FirstPlayerGamesWon++;
+                agentDicePlayerOne.IWin = 1f;
+                agentDicePlayerIA.IWin = -1f;
+
             }
             if (first_value < second_value)
             {
-                print("se ejecuta B");
                 AddGameWin.AIPlayerGamesWon++;
+                agentDicePlayerOne.IWin = -1f;
+                agentDicePlayerIA.IWin = 1f;
             }
             ResetForNewGame();
             return;
@@ -55,14 +61,15 @@ public class EndGameLogic : MonoBehaviour
         {
             if (first_value > second_value)
             {
-                print("se ejecuta C");
                 AddGameWin.FirstPlayerGamesWon++;
-
+                agentDicePlayerOne.IWin = 1f;
+                agentDicePlayerIA.IWin = -1f;
             }
             if (first_value <= second_value)
             {
-                print("se ejecuta D");
                 AddGameWin.AIPlayerGamesWon++;
+                agentDicePlayerOne.IWin = -1f;
+                agentDicePlayerIA.IWin = 1f;
             }
             ResetForNewGame();
             return;

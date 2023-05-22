@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 60239765}
   - component: {fileID: 60239764}
   m_Layer: 5
-  m_Name: ContadorTotalJ1
+  m_Name: ContadorTotal P1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -186,7 +186,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1241511966}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -642,6 +642,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstPlayer: {fileID: 60239764}
   secondPlayer: {fileID: 2123893923}
+  agentDicePlayerOne: {fileID: 580009127}
+  agentDicePlayerIA: {fileID: 1834855418}
 --- !u!1 &211570177
 GameObject:
   m_ObjectHideFlags: 0
@@ -1056,6 +1058,117 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &580009124
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 580009125}
+  - component: {fileID: 580009128}
+  - component: {fileID: 580009127}
+  - component: {fileID: 580009126}
+  m_Layer: 0
+  m_Name: AgentPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &580009125
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580009124}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1241511966}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &580009126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580009124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  TakeActionsBetweenDecisions: 0
+--- !u!114 &580009127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580009124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c4b6bbed8fb04749bd8f7381d190bde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 500
+  myButtonsRows:
+  - {fileID: 1601451605}
+  - {fileID: 914551077}
+  - {fileID: 2117307982}
+  multiplier: 2
+  myBoardMath: {fileID: 60239764}
+  otherPlayerBoardMath: {fileID: 2123893923}
+  myPutDiceIns:
+  - {fileID: 1601451604}
+  - {fileID: 914551076}
+  - {fileID: 2117307981}
+  otherPutDiceIns:
+  - {fileID: 759123589}
+  - {fileID: 1377644930}
+  - {fileID: 2042919115}
+  IWin: 0
+  gameState: 2
+--- !u!114 &580009128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580009124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BrainParameters:
+    VectorObservationSize: 13
+    NumStackedVectorObservations: 1
+    m_ActionSpec:
+      m_NumContinuousActions: 0
+      BranchSizes: 03000000
+    VectorActionSize: 03000000
+    VectorActionDescriptions: []
+    VectorActionSpaceType: 0
+    hasUpgradedBrainParametersWithActionSpec: 1
+  m_Model: {fileID: 0}
+  m_InferenceDevice: 0
+  m_BehaviorType: 0
+  m_BehaviorName: PlayDiceGamePlayerOne
+  TeamId: 0
+  m_UseChildSensors: 1
+  m_UseChildActuators: 1
+  m_ObservableAttributeHandling: 0
 --- !u!1 &702824764
 GameObject:
   m_ObjectHideFlags: 0
@@ -1156,7 +1269,7 @@ RectTransform:
   - {fileID: 244858294}
   - {fileID: 2056249185}
   m_Father: {fileID: 1644542725}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1406,7 +1519,7 @@ RectTransform:
   - {fileID: 930099407}
   - {fileID: 1100549727}
   m_Father: {fileID: 1241511966}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2075,6 +2188,7 @@ Transform:
   m_LocalScale: {x: 56.100002, y: 56.100002, z: 56.100002}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 580009125}
   - {fileID: 1601451603}
   - {fileID: 914551075}
   - {fileID: 2117307980}
@@ -2113,7 +2227,7 @@ GameObject:
   - component: {fileID: 1377644930}
   - component: {fileID: 1377644934}
   m_Layer: 5
-  m_Name: Second Row Player Button
+  m_Name: Second Row Player 2 Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2136,7 +2250,7 @@ RectTransform:
   - {fileID: 1558189866}
   - {fileID: 1559324383}
   m_Father: {fileID: 1644542725}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2988,7 +3102,7 @@ RectTransform:
   - {fileID: 1477314297}
   - {fileID: 211570178}
   m_Father: {fileID: 1241511966}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3198,6 +3312,7 @@ Transform:
   m_LocalScale: {x: 56.100002, y: 56.100002, z: 56.100002}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1834855415}
   - {fileID: 759123588}
   - {fileID: 1377644929}
   - {fileID: 2042919114}
@@ -3264,14 +3379,13 @@ GameObject:
   - component: {fileID: 1834855414}
   - component: {fileID: 1834855418}
   - component: {fileID: 1834855419}
-  - component: {fileID: 1834855420}
   m_Layer: 0
   m_Name: AgentAI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1834855414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3285,12 +3399,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 1
+    VectorObservationSize: 13
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
-      BranchSizes: 020000000200000002000000
-    VectorActionSize: 020000000200000002000000
+      BranchSizes: 03000000
+    VectorActionSize: 03000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
@@ -3314,8 +3428,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_Father: {fileID: 1644542725}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1834855418
 MonoBehaviour:
@@ -3332,13 +3446,24 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 1000
-  myButtonsRows: []
-  multiplier: 0
-  myBoardMath: {fileID: 0}
-  otherPlayerBoardMath: {fileID: 0}
-  myPutDiceIns: []
-  otherPutDiceIns: []
+  MaxStep: 500
+  myButtonsRows:
+  - {fileID: 759123590}
+  - {fileID: 1377644931}
+  - {fileID: 2042919116}
+  multiplier: 2
+  myBoardMath: {fileID: 2123893923}
+  otherPlayerBoardMath: {fileID: 60239764}
+  myPutDiceIns:
+  - {fileID: 759123589}
+  - {fileID: 1377644930}
+  - {fileID: 2042919115}
+  otherPutDiceIns:
+  - {fileID: 1601451604}
+  - {fileID: 914551076}
+  - {fileID: 2117307981}
+  IWin: 0
+  gameState: 3
 --- !u!114 &1834855419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3353,22 +3478,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DecisionPeriod: 5
   TakeActionsBetweenDecisions: 1
---- !u!114 &1834855420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1834855413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88b6042bc9a5d4aa58d931eae49442e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentParameters:
-    maxStep: 0
-  hasUpgradedFromAgentParameters: 1
-  MaxStep: 0
 --- !u!1 &2042919113
 GameObject:
   m_ObjectHideFlags: 0
@@ -3384,7 +3493,7 @@ GameObject:
   - component: {fileID: 2042919115}
   - component: {fileID: 2042919119}
   m_Layer: 5
-  m_Name: 'Third Row Player Button '
+  m_Name: 'Third Row Player 2 Button '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3407,7 +3516,7 @@ RectTransform:
   - {fileID: 1154234794}
   - {fileID: 196917119}
   m_Father: {fileID: 1644542725}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3810,7 +3919,7 @@ RectTransform:
   - {fileID: 1716906985}
   - {fileID: 1487272757}
   m_Father: {fileID: 1241511966}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4004,7 +4113,7 @@ GameObject:
   - component: {fileID: 2123893924}
   - component: {fileID: 2123893923}
   m_Layer: 5
-  m_Name: ContadorTotalJ1
+  m_Name: ContadorTotal P2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4023,7 +4132,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1644542725}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
