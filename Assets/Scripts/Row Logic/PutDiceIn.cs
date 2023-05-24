@@ -31,8 +31,12 @@ public class PutDiceIn : MonoBehaviour
     public void ResetValues(bool isReset)
     {
         if (!isReset) return;
+        DeleteDicesInThisRow();
+    }
 
-        foreach( var dice in dicesInTheRow )
+    public void DeleteDicesInThisRow()
+    {
+        foreach (var dice in dicesInTheRow)
         {
             DeleteDice.DestroyDice(DiceRoller._dice, dice);
         }

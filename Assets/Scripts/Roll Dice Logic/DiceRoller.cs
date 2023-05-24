@@ -54,4 +54,9 @@ public class DiceRoller : MonoBehaviour
 
         PutDiceIn.unasiggnedDice = diceToPut;
     }
+
+    public static void ReRollDice()
+    {
+        gameObjectDiceGO.Value = null;
+    }
 }
