@@ -6,12 +6,6 @@ TagManager:
   tags:
   - Unassigned
   - Assigned
-  - AssignedR1
-  - AssignedR2
-  - AssignedR3
-  - AssignedR1P2
-  - AssignedR2P2
-  - AssignedR3P2
   layers:
   - Default
   - TransparentFX
